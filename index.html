@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DIY Continuous Security &mdash; seceng.guide</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/diff-highlight/prism-diff-highlight.min.css" />
 </head>
 <body>
   <main id="deck" aria-live="polite">
@@ -21,50 +19,84 @@
     </section>
 
     <section class="slide" data-slide="2">
-      <h2>Threat modeling, briefly</h2>
-      <ul class="bullets">
-        <li><strong>Assets.</strong> What are we protecting, and for whom?</li>
-        <li><strong>Adversaries.</strong> Who would attack it, and what do they want?</li>
-        <li><strong>Surfaces.</strong> Where does untrusted input cross a trust boundary?</li>
-        <li><strong>Mitigations.</strong> What controls reduce likelihood or impact?</li>
-      </ul>
-      <blockquote>
-        A threat model is a story you can tell on a whiteboard. If it doesn't fit on
-        a whiteboard, it's an architecture diagram.
-      </blockquote>
+      <h2>Agenda</h2>
+      <div class="agenda">
+        <div class="agenda-section">
+          <h3>Introductions</h3>
+          <ul class="bullets">
+            <li>Who We Are</li>
+            <li>Who You Are</li>
+            <li>What is Continuous Security</li>
+            <li>What We&rsquo;ll Be Covering</li>
+          </ul>
+        </div>
+        <div class="agenda-section">
+          <h3>Labs</h3>
+          <ul class="bullets">
+            <li>SAST &amp; Exercises</li>
+            <li>DAST &amp; Exercises</li>
+            <li>AI-assisted Code Review</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <section class="slide" data-slide="3">
-      <h2>Fixing a SQL injection</h2>
-      <p class="caption">Parameterize the query &mdash; do not interpolate user input.</p>
-      <pre class="code-block"><code class="language-diff diff-highlight">--- a/api/users.py
-+++ b/api/users.py
-@@ -12,9 +12,12 @@ def lookup_user(request):
-     username = request.GET.get("u", "")
-
--    # Vulnerable: user input is concatenated into the SQL string.
--    query = "SELECT id, email FROM users WHERE name = '" + username + "'"
--    rows = db.execute(query).fetchall()
-+    # Parameterized query: the driver binds `username` as a value,
-+    # not as part of the SQL grammar.
-+    rows = db.execute(
-+        "SELECT id, email FROM users WHERE name = ?",
-+        (username,),
-+    ).fetchall()
-
-     return JsonResponse({"users": [dict(r) for r in rows]})
-</code></pre>
+      <h2>Introductions</h2>
+      <p class="lead">Why we created this workshop?</p>
+      <ul class="bullets">
+        <li>We&rsquo;ve had to re-do this over and over again at different orgs.</li>
+        <li>Sharing tips we&rsquo;ve learned over time.</li>
+        <li>We&rsquo;ve struggled so you don&rsquo;t have to!</li>
+      </ul>
     </section>
 
     <section class="slide" data-slide="4">
-      <h2>Defense in depth</h2>
-      <p class="caption">No single control is load-bearing. Stack them.</p>
-      <div class="layers">
-        <div class="layer">Network &mdash; segment, firewall, mTLS between services</div>
-        <div class="layer">Application &mdash; input validation, authn/authz, output encoding</div>
-        <div class="layer">Data &mdash; encryption at rest, least-privilege access, audit</div>
-        <div class="layer">Process &mdash; code review, threat modeling, incident response</div>
-      </div>
+      <h2>What is Continuous Security?</h2>
+      <p class="lead">You may have seen it referred to as &ldquo;shifting left&rdquo;</p>
+      <ul class="bullets">
+        <li>Generally it means the deeper you are in the Software Development Life Cycle (SDLC), the more expensive fixing a security vulnerability can be</li>
+      </ul>
+
+      <p class="lead">Think about it in the simplest cases: a SQL injection is much easier to fix in the development phase compared to the maintenance phase</p>
+      <ul class="bullets">
+        <li>In the maintenance phase, the feature with the vulnerability may be harder to modify (e.g. backwards compatibility, deployed less often, etc) and will require incident response to make sure it wasn&rsquo;t exploited</li>
+        <li>In the development phase, we haven&rsquo;t progressed far enough for it to be a problem</li>
+      </ul>
+
+      <p class="lead">The &ldquo;continuous&rdquo; part here refers to automation</p>
+      <ul class="bullets">
+        <li>By leaning on automation, you can &ldquo;continuously&rdquo; look for security issues with minimal effort on your part</li>
+      </ul>
+
+      <figure class="image-placeholder">
+        Image: &ldquo;Cost of Fixing Security Vulnerabilities Increases&rdquo;
+      </figure>
+    </section>
+
+    <section class="slide" data-slide="5">
+      <h2>What is this workshop?</h2>
+      <p>
+        Our goal for this workshop is for you to build familiarity with
+        <strong>the concepts</strong> of Continuous Security,
+        <strong>not the tools</strong>. Of course, we&rsquo;ll use the tools
+        first to get a handle on what we&rsquo;re doing, but that won&rsquo;t
+        be our focus.
+      </p>
+      <p class="lead">The idea is for you to take these concepts and apply them to other contexts</p>
+      <ul class="bullets">
+        <li>We&rsquo;ll be focusing on looking for bugs in our applications but you could just as easily apply the concepts here to any other security tool</li>
+      </ul>
+      <p>
+        We like the tools we recommend in this workshop, but each
+        organization has their own needs and preferences.
+      </p>
+      <p>
+        This is what the &ldquo;DIY&rdquo; part of the DIY Continuous Security
+        refers to: doing it yourself by selecting off-the-shelf open source
+        tools that make the most sense for you, without having to depend on
+        paid products to do everything for you.
+      </p>
     </section>
 
   </main>
@@ -95,9 +127,6 @@
     >&rsaquo;</button>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-diff.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/diff-highlight/prism-diff-highlight.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
