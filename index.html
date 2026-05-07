@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>seceng.guide — Security Engineering</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/diff-highlight/prism-diff-highlight.min.css" />
+</head>
+<body>
+  <main id="deck" aria-live="polite">
+
+    <section class="slide title-slide" data-slide="1">
+      <div class="title-block">
+        <h1>Security Engineering</h1>
+        <p class="subtitle">A working guide for builders</p>
+        <p class="meta">seceng.guide</p>
+      </div>
+      <p class="hint">Use <kbd>&larr;</kbd> <kbd>&rarr;</kbd> to navigate. Click the slide number to jump.</p>
+    </section>
+
+    <section class="slide" data-slide="2">
+      <h2>Threat modeling, briefly</h2>
+      <ul class="bullets">
+        <li><strong>Assets.</strong> What are we protecting, and for whom?</li>
+        <li><strong>Adversaries.</strong> Who would attack it, and what do they want?</li>
+        <li><strong>Surfaces.</strong> Where does untrusted input cross a trust boundary?</li>
+        <li><strong>Mitigations.</strong> What controls reduce likelihood or impact?</li>
+      </ul>
+      <blockquote>
+        A threat model is a story you can tell on a whiteboard. If it doesn't fit on
+        a whiteboard, it's an architecture diagram.
+      </blockquote>
+    </section>
+
+    <section class="slide" data-slide="3">
+      <h2>Fixing a SQL injection</h2>
+      <p class="caption">Parameterize the query &mdash; do not interpolate user input.</p>
+      <pre class="code-block"><code class="language-diff diff-highlight">--- a/api/users.py
++++ b/api/users.py
+@@ -12,9 +12,12 @@ def lookup_user(request):
+     username = request.GET.get("u", "")
+
+-    # Vulnerable: user input is concatenated into the SQL string.
+-    query = "SELECT id, email FROM users WHERE name = '" + username + "'"
+-    rows = db.execute(query).fetchall()
++    # Parameterized query: the driver binds `username` as a value,
++    # not as part of the SQL grammar.
++    rows = db.execute(
++        "SELECT id, email FROM users WHERE name = ?",
++        (username,),
++    ).fetchall()
+
+     return JsonResponse({"users": [dict(r) for r in rows]})
+</code></pre>
+    </section>
+
+    <section class="slide" data-slide="4">
+      <h2>Defense in depth</h2>
+      <p class="caption">No single control is load-bearing. Stack them.</p>
+      <div class="layers">
+        <div class="layer">Network &mdash; segment, firewall, mTLS between services</div>
+        <div class="layer">Application &mdash; input validation, authn/authz, output encoding</div>
+        <div class="layer">Data &mdash; encryption at rest, least-privilege access, audit</div>
+        <div class="layer">Process &mdash; code review, threat modeling, incident response</div>
+      </div>
+    </section>
+
+  </main>
+
+  <button
+    id="slide-counter"
+    class="slide-counter"
+    type="button"
+    aria-label="Jump to slide"
+    title="Click to jump to a slide"
+  >
+    <span class="num">1</span>
+    <span class="sep">/</span>
+    <span class="num">?</span>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-diff.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/diff-highlight/prism-diff-highlight.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
