@@ -3,6 +3,7 @@
   --fg: #e6e6e6;
   --muted: #9aa3ad;
   --accent: #7aa2f7;
+  --link: #e6b84a;
   --rule: #1f2530;
   --code-bg: #0a0d12;
 }
@@ -25,6 +26,7 @@ body.light-mode {
   --fg: #1a1d23;
   --muted: #5c6470;
   --accent: #2563a8;
+  --link: #5d2b8a;
   --rule: #d0d4da;
 }
 
@@ -54,6 +56,7 @@ h1 {
   font-weight: 700;
   margin: 0 0 0.5rem 0;
   letter-spacing: -0.02em;
+  color: var(--link);
 }
 
 h2 {
@@ -61,6 +64,7 @@ h2 {
   font-weight: 600;
   margin: 0 0 1.5rem 0;
   letter-spacing: -0.01em;
+  color: var(--link);
 }
 
 .slide h3 {
@@ -137,7 +141,7 @@ h2 {
 }
 
 .slide a {
-  color: var(--accent);
+  color: var(--link);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
