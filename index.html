@@ -109,6 +109,112 @@
       </p>
     </section>
 
+    <section class="slide" data-slide="6">
+      <h2>Who&rsquo;s this workshop for?</h2>
+      <p class="lead">The intended audience for this workshop are</p>
+      <ul class="bullets">
+        <li>Appsec people looking to broaden their impact</li>
+        <li>Security consultants looking to go in house</li>
+        <li>Software engineers looking to bring security into their practices</li>
+        <li>Technical people looking to pivot into security engineering</li>
+        <li>The first security hire or engineer with similar responsibilities looking to establish a good baseline</li>
+      </ul>
+      <p>
+        This isn&rsquo;t an exhaustive list &mdash; it&rsquo;s just meant more so
+        for assuming a baseline level of experience before we start jumping into
+        workshops.
+      </p>
+      <p>
+        Feel free to interrupt to ask questions at any time. If there&rsquo;s
+        something that feels unclear or you run into an error, chances are you
+        might not be the only one!
+      </p>
+    </section>
+
+    <section class="slide" data-slide="7">
+      <h2>What will we be covering?</h2>
+      <p class="lead"><strong>SAST</strong>: Static Application Security Testing</p>
+      <ul class="bullets">
+        <li>Automating application security code reviews</li>
+      </ul>
+      <p class="lead"><strong>DAST</strong>: Dynamic Application Security Testing</p>
+      <ul class="bullets">
+        <li>Automating interacting the app to manually find vulnerabilities</li>
+      </ul>
+      <p class="lead"><strong>SCA</strong>: Software Composition Analysis</p>
+      <ul class="bullets">
+        <li>Detecting out of date and vulnerable libraries</li>
+      </ul>
+      <p class="lead"><strong>Secrets Detection</strong></p>
+      <ul class="bullets">
+        <li>Looking for secrets like API keys and PII being pushed in code</li>
+      </ul>
+      <p class="lead"><strong>AI-Assisted Code Review</strong></p>
+      <ul class="bullets">
+        <li>Using Claude Code&rsquo;s <code>/security-review</code> locally, then running it within CI as a GitHub Action</li>
+      </ul>
+    </section>
+
+    <section class="slide" data-slide="8">
+      <h2>Getting started</h2>
+      <ol class="steps">
+        <li>
+          <p>Create a Github account if you don&rsquo;t already have one</p>
+          <ul class="bullets">
+            <li>Tell us your username so we can invite you to our organization</li>
+          </ul>
+        </li>
+        <li>
+          <p>Install Docker</p>
+          <ul class="bullets">
+            <li><a href="https://docs.docker.com/desktop/setup/install/mac-install/" target="_blank" rel="noopener">docs.docker.com/desktop/setup/install/mac-install/</a></li>
+            <li><a href="https://docs.docker.com/desktop/setup/install/windows-install/" target="_blank" rel="noopener">docs.docker.com/desktop/setup/install/windows-install/</a></li>
+            <li>
+              Confirm it works by running these commands in your terminal
+              <ul class="bullets">
+                <li><code>docker pull hello-world</code></li>
+                <li><code>docker run hello-world</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>Fork &amp; clone <a href="https://github.com/seceng-sandbox/jester-social" target="_blank" rel="noopener">seceng-sandbox/jester-social</a> to your computer</p>
+          <ul class="bullets">
+            <li>This will only work after being added to the Github organization</li>
+            <li>No need to do anything with this code &mdash; we will be using it for labs later</li>
+          </ul>
+        </li>
+      </ol>
+      <p>
+        We will be using the Github Web UI to make our code changes, so don&rsquo;t
+        worry about setting up a developer environment.
+      </p>
+    </section>
+
+    <section class="slide title-slide section-slide" data-slide="9">
+      <div class="title-block">
+        <p class="eyebrow">Part 2</p>
+        <h1>Static Application Security Testing</h1>
+        <p class="subtitle">(or, SAST for short)</p>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="10">
+      <h2>What is Static Application Security Testing (SAST)?</h2>
+      <p class="lead">Fundamentally, it&rsquo;s automating the code review process</p>
+      <ul class="bullets">
+        <li>Not strictly from an application security perspective, but ours today will be</li>
+      </ul>
+      <p class="lead">When performing an application security code review, you might ask questions like</p>
+      <ul class="bullets">
+        <li>Can I control the data that this function uses?</li>
+        <li>Is this function being used correctly? Does it pose any risk if not?</li>
+        <li>What will this function return?</li>
+      </ul>
+      <p>SAST tools allow you to answer questions like these automatically, but faster and more efficiently.</p>
+    </section>
+
   </main>
 
   <div id="deck-nav" class="deck-nav">

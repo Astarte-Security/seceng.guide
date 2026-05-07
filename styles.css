@@ -117,6 +117,56 @@ h2 {
   margin: 0.4em 0;
 }
 
+.bullets .bullets {
+  margin: 0.3em 0 0 0;
+}
+
+.steps {
+  margin: 0 0 1rem 0;
+  padding-left: 1.5em;
+}
+
+.steps > li {
+  margin: 0 0 1.2rem 0;
+  padding-left: 0.3em;
+}
+
+.steps > li > p:first-child {
+  margin: 0 0 0.4rem 0;
+  font-weight: 600;
+}
+
+.slide a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  word-break: break-word;
+}
+
+.slide a:hover,
+.slide a:focus-visible {
+  text-decoration-thickness: 2px;
+  outline: none;
+}
+
+.slide code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: var(--rule);
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.eyebrow {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--accent);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem 0;
+}
+
 .lead {
   margin: 1rem 0 0.4rem 0;
 }
