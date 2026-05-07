@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DIY Continuous Security &mdash; seceng.guide</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
 </head>
 <body>
   <div id="theme-zone" class="theme-zone">
@@ -215,6 +216,129 @@
       <p>SAST tools allow you to answer questions like these automatically, but faster and more efficiently.</p>
     </section>
 
+    <section class="slide" data-slide="11">
+      <h2>SAST for Vulnerability Detection</h2>
+      <ul class="bullets">
+        <li>Here&rsquo;s a sample Python/Django API for getting information about an item</li>
+        <li>There&rsquo;s a trivial SQL injection vulnerability here</li>
+        <li>We could have caught this manually by making sure everyone who writes code includes us on code reviews, but that&rsquo;s pretty unrealistic</li>
+      </ul>
+<pre class="code-block"><code class="language-python">from django.urls import path
+from django.http import JsonResponse
+from django.db import connection
+
+def item_view(request, item_id):
+    with connection.cursor() as cursor:
+        cursor.execute(f"SELECT * FROM store_item WHERE id = {item_id}")
+        row = cursor.fetchone()
+
+    if row:
+        return JsonResponse({
+            "id": row[0],
+            "name": row[1],
+            "price": row[2],
+        })
+    else:
+        return JsonResponse({"error": "Item not found"}, status=404)
+
+urlpatterns = [
+    path("items/&lt;item_id&gt;/", item_view),
+]
+</code></pre>
+    </section>
+
+    <section class="slide" data-slide="12">
+      <h2>Enter Semgrep</h2>
+      <p class="lead">Semgrep is an open source tool that can automatically detect many types of vulnerabilities in code</p>
+      <ul class="bullets">
+        <li>It covers more languages and frameworks than any one of us could all possibly be familiar with</li>
+      </ul>
+      <p class="lead">These detections are made public as community maintained rules</p>
+      <ul class="bullets">
+        <li>Being able to write rules means we can write our own ones tailored to the codebases and organizations we work with</li>
+      </ul>
+      <p>Let&rsquo;s run Semgrep against the sample from before.</p>
+      <figure class="image-placeholder">Image: Semgrep Logo</figure>
+    </section>
+
+    <section class="slide" data-slide="13">
+      <h2>Running Semgrep</h2>
+<pre class="code-block"><code class="language-bash">view_item.py
+&gt;&gt; python.lang.security.audit.formatted-sql-query.formatted-sql-query
+      Detected possible formatted SQL query. Use parameterized queries instead.
+      Details: https://sg.run/EkWw
+
+        7| cursor.execute(f"SELECT * FROM store_item WHERE id = {item_id}")
+</code></pre>
+      <p class="lead">This is feedback that a developer can make sense of without us having to get involved!</p>
+      <p>It told us the line number, included a sample of the affected code, tells us what we might have done wrong and even makes a recommendation.</p>
+    </section>
+
+    <section class="slide" data-slide="14">
+      <h2>How is automating SAST useful?</h2>
+      <p class="lead">It frees up time for us to work on other security problems</p>
+      <ul class="bullets">
+        <li>A lot of the questions asked during an application security code review are fundamentally simple questions</li>
+        <li>Having the basics covered for us means we can work on more complex, in-depth questions</li>
+      </ul>
+      <p class="lead">It increases the impact you can have as a security practitioner</p>
+      <ul class="bullets">
+        <li>With the time freed up from doing code reviews, we can work on projects to address other security problems</li>
+      </ul>
+      <p class="lead">It means you&rsquo;re not the blocker for providing a baseline level of security</p>
+      <ul class="bullets">
+        <li>If your coworkers needed you to sign off on every piece of code that goes to production, they would hate you and your team &#9785;</li>
+        <li>You would hate it too &mdash; doing nothing but code reviews all week can be exhausting</li>
+      </ul>
+    </section>
+
+    <section class="slide" data-slide="15">
+      <h2>But what are its limitations?</h2>
+      <p>Like all automated tooling, SAST has its limitations.</p>
+      <p>We need to be aware of these limitations before going into this kind of work, or we risk wasting our time and annoying our coworkers.</p>
+    </section>
+
+    <section class="slide" data-slide="16">
+      <h2>SAST Tools Don&rsquo;t Have Context</h2>
+      <p class="lead">SAST tools can only find vulnerabilities they&rsquo;re designed to look for; this may sound obvious but in practice this means they can only operate on context available in code</p>
+      <ul class="bullets">
+        <li>For example, if you&rsquo;re looking at a piece of encryption code, SAST may complain that you&rsquo;re using a weak algorithm or an improper configuration. However, if you were dealing with passwords, this feedback would be wrong. SAST tools typically cannot pick up on this and will not be able to recommend that you should be hashing instead.</li>
+        <li>More succinctly: SAST tools do not have the &ldquo;product context&rdquo; of your code and cannot determine its authors&rsquo; intentions.</li>
+      </ul>
+      <p>SAST tools are meant to augment your capabilities &mdash; not replace them.</p>
+<pre class="code-block"><code class="language-java">Cipher.getInstance("AES/ECB/NoPadding");
+</code></pre>
+<pre class="code-block"><code class="language-java">Cipher.getInstance("AES/GCM/NoPadding");
+</code></pre>
+      <p>Static analysis tools can tell the difference between these, but will not be able to tell you that you should probably use something like bcrypt instead.</p>
+    </section>
+
+    <section class="slide" data-slide="17">
+      <h2>SAST Tools are False Positive Prone</h2>
+      <p class="lead">Static analysis tools can have high false positive rates</p>
+      <ul class="bullets">
+        <li>Because they don&rsquo;t have full context, they may not be able to tell that certain types of vulnerabilities are not relevant to you</li>
+        <li>Other detections may be overzealous and err on the side of caution way too often</li>
+      </ul>
+      <p class="lead">Typically you will have some sort of &ldquo;tuning&rdquo; stage where you disable rules that are false positive prone</p>
+      <ul class="bullets">
+        <li>Specific to your organization</li>
+        <li>This step is crucial, otherwise you risk annoying your coworkers and training them to ignore all findings, including true positives!</li>
+      </ul>
+    </section>
+
+    <section class="slide" data-slide="18">
+      <h2>Deploying Static Analysis Tools</h2>
+      <p class="lead">For larger organizations and codebases, deploying a static analysis tool is more complicated than just installing it and walking away</p>
+      <ul class="bullets">
+        <li>The limitations we talked about will haunt your organization if you don&rsquo;t take care of them early on</li>
+      </ul>
+      <p class="lead">Any security tool &mdash; not just static analysis ones &mdash; need to be set up in such a way that maintenance and overhead is addressed ahead of time, otherwise you risk wasting time and effort</p>
+      <ul class="bullets">
+        <li>Maintenance can include things like modifying rules, adding new ones, and vendor updates</li>
+      </ul>
+    </section>
+
   </main>
 
   <div id="deck-nav" class="deck-nav">
@@ -243,6 +367,8 @@
     >&rsaquo;</button>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

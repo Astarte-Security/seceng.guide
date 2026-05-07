@@ -162,6 +162,27 @@ h2 {
   font-size: 0.9em;
 }
 
+/* Multi-line code blocks always render on a dark "window" so the
+   prism-tomorrow theme stays readable in both light and dark modes. */
+.code-block {
+  background: var(--code-bg);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1em 1.2em;
+  font-size: 0.75rem;
+  overflow: auto;
+  max-height: 60vh;
+  margin: 0 0 1.2rem 0;
+}
+
+.slide .code-block code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+  color: #e6e6e6;
+}
+
 .eyebrow {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   color: var(--accent);
