@@ -4,6 +4,9 @@
   const slides = Array.from(document.querySelectorAll(".slide"));
   const total = slides.length;
   const counter = document.getElementById("slide-counter");
+  const nav = document.getElementById("deck-nav");
+  const prevBtn = document.getElementById("nav-prev");
+  const nextBtn = document.getElementById("nav-next");
 
   let index = 0;
 
@@ -21,6 +24,8 @@
     slides[i].classList.add("is-active");
     index = i;
     renderCounter();
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === total - 1;
     if (window.history && window.history.replaceState) {
       window.history.replaceState(null, "", "#" + (i + 1));
     }
@@ -107,6 +112,29 @@
       e.stopPropagation();
     });
     input.addEventListener("blur", function () { finish(true); });
+  });
+
+  // Click-arrow navigation.
+  prevBtn.addEventListener("click", function () { show(index - 1); });
+  nextBtn.addEventListener("click", function () { show(index + 1); });
+
+  // Reveal arrows when the user hovers the nav cluster; hide 3s after leaving.
+  let hideTimer = null;
+  nav.addEventListener("mouseenter", function () {
+    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+    nav.classList.add("is-revealed");
+  });
+  nav.addEventListener("mouseleave", function () {
+    if (hideTimer) clearTimeout(hideTimer);
+    hideTimer = setTimeout(function () {
+      nav.classList.remove("is-revealed");
+      hideTimer = null;
+    }, 3000);
+  });
+  // Keyboard focus also reveals (so tab-users can find the buttons).
+  nav.addEventListener("focusin", function () {
+    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+    nav.classList.add("is-revealed");
   });
 
   // Hash navigation (e.g. user pastes #3).

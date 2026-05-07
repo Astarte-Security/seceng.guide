@@ -69,17 +69,31 @@
 
   </main>
 
-  <button
-    id="slide-counter"
-    class="slide-counter"
-    type="button"
-    aria-label="Jump to slide"
-    title="Click to jump to a slide"
-  >
-    <span class="num">1</span>
-    <span class="sep">/</span>
-    <span class="num">?</span>
-  </button>
+  <div id="deck-nav" class="deck-nav">
+    <button
+      id="nav-prev"
+      class="nav-arrow"
+      type="button"
+      aria-label="Previous slide"
+    >&lsaquo;</button>
+    <button
+      id="slide-counter"
+      class="slide-counter"
+      type="button"
+      aria-label="Jump to slide"
+      title="Click to jump to a slide"
+    >
+      <span class="num">1</span>
+      <span class="sep">/</span>
+      <span class="num">?</span>
+    </button>
+    <button
+      id="nav-next"
+      class="nav-arrow"
+      type="button"
+      aria-label="Next slide"
+    >&rsaquo;</button>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-diff.min.js"></script>

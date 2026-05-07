@@ -141,11 +141,21 @@ blockquote {
   border-radius: 4px;
 }
 
-/* Slide counter — very faded, bottom-right. */
-.slide-counter {
+/* Bottom-right nav cluster: prev arrow, counter, next arrow.
+   Padding/margin extends the hover hit-zone beyond the visible buttons. */
+.deck-nav {
   position: fixed;
   right: 2vw;
   bottom: 2vh;
+  display: flex;
+  align-items: center;
+  gap: 0.1em;
+  padding: 1.5em;
+  margin: -1.5em;
+  pointer-events: auto;
+}
+
+.slide-counter {
   background: transparent;
   border: none;
   color: var(--fg);
@@ -158,9 +168,40 @@ blockquote {
 }
 
 .slide-counter:hover,
-.slide-counter:focus-visible {
+.slide-counter:focus-visible,
+.deck-nav.is-revealed .slide-counter {
   opacity: 0.85;
   outline: none;
+}
+
+.nav-arrow {
+  background: transparent;
+  border: none;
+  color: var(--fg);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.15em 0.45em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+
+.deck-nav.is-revealed .nav-arrow {
+  opacity: 0.55;
+  pointer-events: auto;
+}
+
+.nav-arrow:hover,
+.nav-arrow:focus-visible {
+  opacity: 0.95;
+  outline: none;
+}
+
+.nav-arrow:disabled {
+  cursor: default;
+  opacity: 0.15;
 }
 
 .slide-counter .sep {
