@@ -143,6 +143,16 @@
     show(initialIndex());
   });
 
+  // Render today's date on the title slide.
+  const dateEl = document.getElementById("title-date");
+  if (dateEl) {
+    dateEl.textContent = new Date().toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  }
+
   // Bootstrap.
   slides.forEach(function (s) { s.classList.remove("is-active"); });
   show(initialIndex());
