@@ -143,6 +143,56 @@
     show(initialIndex());
   });
 
+  // Theme toggle: top-left hover-revealed sun/moon icon.
+  // Sun = "switch to light" (shown while in dark mode).
+  // Moon = "switch to dark" (shown while in light mode).
+  const SUN  = "☼";  // ☼
+  const MOON = "⏾";  // ⏾
+
+  const themeZone = document.getElementById("theme-zone");
+  const themeToggle = document.getElementById("theme-toggle");
+  const themeIcon = document.getElementById("theme-icon");
+
+  function renderThemeIcon() {
+    const isLight = document.body.classList.contains("light-mode");
+    themeIcon.textContent = isLight ? MOON : SUN;
+    themeToggle.setAttribute(
+      "aria-label",
+      isLight ? "Switch to dark mode" : "Switch to light mode"
+    );
+  }
+
+  try {
+    if (localStorage.getItem("theme") === "light") {
+      document.body.classList.add("light-mode");
+    }
+  } catch (e) { /* localStorage unavailable */ }
+  renderThemeIcon();
+
+  themeToggle.addEventListener("click", function () {
+    document.body.classList.toggle("light-mode");
+    const isLight = document.body.classList.contains("light-mode");
+    try { localStorage.setItem("theme", isLight ? "light" : "dark"); } catch (e) {}
+    renderThemeIcon();
+  });
+
+  let themeHideTimer = null;
+  themeZone.addEventListener("mouseenter", function () {
+    if (themeHideTimer) { clearTimeout(themeHideTimer); themeHideTimer = null; }
+    themeZone.classList.add("is-revealed");
+  });
+  themeZone.addEventListener("mouseleave", function () {
+    if (themeHideTimer) clearTimeout(themeHideTimer);
+    themeHideTimer = setTimeout(function () {
+      themeZone.classList.remove("is-revealed");
+      themeHideTimer = null;
+    }, 3000);
+  });
+  themeZone.addEventListener("focusin", function () {
+    if (themeHideTimer) { clearTimeout(themeHideTimer); themeHideTimer = null; }
+    themeZone.classList.add("is-revealed");
+  });
+
   // Render today's date on the title slide.
   const dateEl = document.getElementById("title-date");
   if (dateEl) {

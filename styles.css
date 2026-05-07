@@ -16,8 +16,16 @@ html, body {
   background: var(--bg);
   color: var(--fg);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 18px;
+  font-size: 27px;
   line-height: 1.5;
+}
+
+body.light-mode {
+  --bg: #f7f7f5;
+  --fg: #1a1d23;
+  --muted: #5c6470;
+  --accent: #2563a8;
+  --rule: #d0d4da;
 }
 
 #deck {
@@ -93,7 +101,7 @@ h2 {
 
 .hint kbd {
   background: var(--rule);
-  border: 1px solid #2a313d;
+  border: 1px solid var(--muted);
   border-radius: 4px;
   padding: 1px 6px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -140,6 +148,50 @@ h2 {
   color: var(--muted);
   font-style: italic;
   text-align: center;
+}
+
+/* Top-left hover zone for the theme toggle. The zone is invisible —
+   it just enlarges the hit-area so the user doesn't have to land on
+   the icon exactly to reveal it. */
+.theme-zone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6em;
+  height: 6em;
+  z-index: 10;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  background: transparent;
+  border: none;
+  color: var(--fg);
+  cursor: pointer;
+  padding: 0.3em 0.5em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+
+.theme-zone.is-revealed .theme-toggle {
+  opacity: 0.55;
+  pointer-events: auto;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  opacity: 0.95;
+  outline: none;
+}
+
+.theme-icon {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 1.6rem;
+  line-height: 1;
 }
 
 /* Bottom-right nav cluster: prev arrow, counter, next arrow.
