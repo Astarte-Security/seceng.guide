@@ -38,7 +38,7 @@ def item_view(request, item_id):
         return JsonResponse({"error": "Item not found"}, status=404)
 
 urlpatterns = [
-    path("items/<item_id>/", item_view), status=404)
+    path("items/<item_id>/", item_view), 
 ]
 ```
 
@@ -58,7 +58,7 @@ Let’s run Semgrep against the sample from before
 
 ```Bash
 view_item.py
->> python. lang. security. audit. formatted-sql-query. formatted-sql-query
+>> python.lang.security.audit.formatted-sql-query.formatted-sql-query
       Detected possible formatted SQL query. Use parameterized queries instead.
       Details: https://sg.run/EkWw
 

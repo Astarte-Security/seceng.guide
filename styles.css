@@ -16,10 +16,14 @@ html, body {
   height: 100%;
   background: var(--bg);
   color: var(--fg);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
   font-size: 27px;
   line-height: 1.5;
 }
+
+body.font-sans  { --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+body.font-serif { --font-family: "Iowan Old Style", "Apple Garamond", Georgia, "Times New Roman", serif; }
+body.font-mono  { --font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
 body.light-mode {
   --bg: #f7f7f5;
@@ -190,6 +194,148 @@ h2 {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin: 0 0 0.6rem 0;
+}
+
+/* Top-right settings panel. */
+.settings {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  z-index: 20;
+}
+
+.settings-toggle {
+  background: transparent;
+  border: none;
+  color: var(--fg);
+  cursor: pointer;
+  padding: 0.2em 0.4em;
+  font-size: 1.6rem;
+  line-height: 1;
+  opacity: 0.35;
+  transition: opacity 200ms ease;
+}
+
+.settings-toggle:hover,
+.settings-toggle:focus-visible,
+.settings.is-open .settings-toggle {
+  opacity: 0.95;
+  outline: none;
+}
+
+.settings-menu {
+  position: absolute;
+  top: calc(100% + 0.4em);
+  right: 0;
+  min-width: 16em;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1em;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.settings-menu[hidden] { display: none; }
+
+.settings-group + .settings-group {
+  margin-top: 0.9em;
+  padding-top: 0.9em;
+  border-top: 1px solid var(--rule);
+}
+
+.settings-label {
+  margin: 0 0 0.5em 0;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.settings-options {
+  display: flex;
+  gap: 0.4em;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.font-option {
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--fg);
+  border-radius: 6px;
+  padding: 0.3em 0.7em;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.7rem;
+  transition: background 120ms ease;
+}
+
+.font-option:hover,
+.font-option:focus-visible {
+  background: var(--rule);
+  outline: none;
+}
+
+.font-option.is-active {
+  background: var(--rule);
+  border-color: var(--muted);
+}
+
+.accent-option {
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  background: transparent;
+  transition: transform 120ms ease;
+}
+
+.accent-option:hover,
+.accent-option:focus-visible {
+  transform: scale(1.12);
+  outline: none;
+}
+
+.accent-option.is-active {
+  border-color: var(--fg);
+}
+
+.accent-default {
+  background: linear-gradient(120deg, #e6b84a 50%, #5d2b8a 50%);
+}
+
+.settings-actions {
+  display: flex;
+  gap: 0.5em;
+  justify-content: flex-end;
+}
+
+.settings-action {
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--fg);
+  border-radius: 6px;
+  padding: 0.4em 0.6em;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  transition: background 120ms ease;
+}
+
+.settings-action:hover,
+.settings-action:focus-visible {
+  background: var(--rule);
+  outline: none;
+}
+
+.settings-action svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  display: block;
 }
 
 .lead {

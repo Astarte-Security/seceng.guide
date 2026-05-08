@@ -193,6 +193,76 @@
     themeZone.classList.add("is-revealed");
   });
 
+  // Settings panel: gear button, font picker, accent swatches, home button.
+  const settings = document.getElementById("settings");
+  const settingsToggle = document.getElementById("settings-toggle");
+  const settingsMenu = document.getElementById("settings-menu");
+  const fontOptions = settingsMenu.querySelectorAll(".font-option");
+  const accentOptions = settingsMenu.querySelectorAll(".accent-option");
+  const homeBtn = document.getElementById("settings-home");
+
+  function setSettingsOpen(open) {
+    settings.classList.toggle("is-open", open);
+    settingsMenu.hidden = !open;
+    settingsToggle.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+
+  settingsToggle.addEventListener("click", function (e) {
+    e.stopPropagation();
+    setSettingsOpen(settingsMenu.hidden);
+  });
+  document.addEventListener("click", function (e) {
+    if (settingsMenu.hidden) return;
+    if (!settings.contains(e.target)) setSettingsOpen(false);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !settingsMenu.hidden) {
+      setSettingsOpen(false);
+      settingsToggle.focus();
+    }
+  });
+
+  function applyFont(name) {
+    document.body.classList.remove("font-sans", "font-serif", "font-mono");
+    document.body.classList.add("font-" + name);
+    fontOptions.forEach(function (b) {
+      b.classList.toggle("is-active", b.dataset.font === name);
+    });
+    try { localStorage.setItem("font", name); } catch (e) {}
+  }
+  fontOptions.forEach(function (b) {
+    b.addEventListener("click", function () { applyFont(b.dataset.font); });
+  });
+
+  function applyAccent(value) {
+    if (value === "default") {
+      document.body.style.removeProperty("--link");
+    } else {
+      document.body.style.setProperty("--link", value);
+    }
+    accentOptions.forEach(function (b) {
+      b.classList.toggle("is-active", b.dataset.accent === value);
+    });
+    try { localStorage.setItem("accent", value); } catch (e) {}
+  }
+  accentOptions.forEach(function (b) {
+    b.addEventListener("click", function () { applyAccent(b.dataset.accent); });
+  });
+
+  homeBtn.addEventListener("click", function () {
+    show(0);
+    setSettingsOpen(false);
+  });
+
+  let storedFont = "sans";
+  let storedAccent = "default";
+  try {
+    storedFont = localStorage.getItem("font") || "sans";
+    storedAccent = localStorage.getItem("accent") || "default";
+  } catch (e) {}
+  applyFont(storedFont);
+  applyAccent(storedAccent);
+
   // Render today's date on the title slide.
   const dateEl = document.getElementById("title-date");
   if (dateEl) {
