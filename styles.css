@@ -21,13 +21,17 @@ html, body {
   line-height: 1.5;
 }
 
-body.font-sans    { --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-body.font-serif   { --font-family: "Iowan Old Style", "Apple Garamond", Georgia, "Times New Roman", serif; }
-body.font-mono    { --font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-body.font-display { --font-family: Impact, "Haettenschweiler", "Arial Narrow Bold", "Helvetica Inserat", sans-serif; }
-body.font-slab    { --font-family: Rockwell, "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Courier New", serif; }
-body.font-round   { --font-family: "Avenir Next", Avenir, "Nunito", "Arial Rounded MT Bold", "Helvetica Neue", sans-serif; }
-body.font-hand    { --font-family: "Marker Felt", "Bradley Hand", "Comic Sans MS", "Brush Script MT", cursive; }
+body.font-sans        { --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+body.font-serif       { --font-family: "Iowan Old Style", "Apple Garamond", Georgia, "Times New Roman", serif; }
+body.font-mono        { --font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+body.font-verdana     { --font-family: Verdana, "DejaVu Sans", Geneva, sans-serif; }
+body.font-didot       { --font-family: Didot, "Bodoni 72", "Bodoni MT", "Playfair Display", serif; }
+body.font-baskerville { --font-family: Baskerville, "Baskerville Old Face", "Libre Baskerville", "Hoefler Text", serif; }
+body.font-plex        { --font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+body.font-jetbrains   { --font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+body.font-inter       { --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+body.font-space       { --font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+body.font-vt323       { --font-family: "VT323", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
 body.light-mode {
   --bg: #f7f7f5;
