@@ -21,9 +21,13 @@ html, body {
   line-height: 1.5;
 }
 
-body.font-sans  { --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-body.font-serif { --font-family: "Iowan Old Style", "Apple Garamond", Georgia, "Times New Roman", serif; }
-body.font-mono  { --font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+body.font-sans    { --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+body.font-serif   { --font-family: "Iowan Old Style", "Apple Garamond", Georgia, "Times New Roman", serif; }
+body.font-mono    { --font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+body.font-display { --font-family: Impact, "Haettenschweiler", "Arial Narrow Bold", "Helvetica Inserat", sans-serif; }
+body.font-slab    { --font-family: Rockwell, "Rockwell Nova", "Roboto Slab", "DejaVu Serif", "Courier New", serif; }
+body.font-round   { --font-family: "Avenir Next", Avenir, "Nunito", "Arial Rounded MT Bold", "Helvetica Neue", sans-serif; }
+body.font-hand    { --font-family: "Marker Felt", "Bradley Hand", "Comic Sans MS", "Brush Script MT", cursive; }
 
 body.light-mode {
   --bg: #f7f7f5;
@@ -196,15 +200,22 @@ h2 {
   margin: 0 0 0.6rem 0;
 }
 
-/* Top-right settings panel. */
+/* Top-right settings hover zone — mirrors .theme-zone in the top-left.
+   The 6em x 6em fixed box just enlarges the hover hit-area so the user
+   doesn't have to land on the gear exactly to reveal it. */
 .settings {
   position: fixed;
-  top: 1em;
-  right: 1em;
+  top: 0;
+  right: 0;
+  width: 6em;
+  height: 6em;
   z-index: 20;
 }
 
 .settings-toggle {
+  position: absolute;
+  top: 1em;
+  right: 1em;
   background: transparent;
   border: none;
   color: var(--fg);
@@ -212,8 +223,15 @@ h2 {
   padding: 0.2em 0.4em;
   font-size: 1.6rem;
   line-height: 1;
-  opacity: 0.35;
+  opacity: 0;
+  pointer-events: none;
   transition: opacity 200ms ease;
+}
+
+.settings.is-revealed .settings-toggle,
+.settings.is-open .settings-toggle {
+  opacity: 0.55;
+  pointer-events: auto;
 }
 
 .settings-toggle:hover,
@@ -225,8 +243,8 @@ h2 {
 
 .settings-menu {
   position: absolute;
-  top: calc(100% + 0.4em);
-  right: 0;
+  top: 3.4em;
+  right: 1em;
   min-width: 16em;
   background: var(--bg);
   border: 1px solid var(--rule);

@@ -254,6 +254,26 @@
     setSettingsOpen(false);
   });
 
+  // Reveal the gear on hover near the top-right; hide 3s after leaving.
+  // Hovering the open menu counts as hovering .settings (menu is a child),
+  // so the gear stays visible while the menu is in use.
+  let settingsHideTimer = null;
+  settings.addEventListener("mouseenter", function () {
+    if (settingsHideTimer) { clearTimeout(settingsHideTimer); settingsHideTimer = null; }
+    settings.classList.add("is-revealed");
+  });
+  settings.addEventListener("mouseleave", function () {
+    if (settingsHideTimer) clearTimeout(settingsHideTimer);
+    settingsHideTimer = setTimeout(function () {
+      settings.classList.remove("is-revealed");
+      settingsHideTimer = null;
+    }, 3000);
+  });
+  settings.addEventListener("focusin", function () {
+    if (settingsHideTimer) { clearTimeout(settingsHideTimer); settingsHideTimer = null; }
+    settings.classList.add("is-revealed");
+  });
+
   let storedFont = "sans";
   let storedAccent = "default";
   try {
