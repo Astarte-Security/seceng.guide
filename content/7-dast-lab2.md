@@ -44,28 +44,16 @@ jobs:
 
 3. If your repository does not have **Issues** enabled, you may see this error message:
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/9e59bd9b-c80d-4c44-866c-6b84fc90cf3b"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="735" height="112" alt="image" src="https://github.com/user-attachments/assets/35e48fb8-43e7-4736-a37e-3991b0bd69d5" />
+
 
 To enable **Issues**, go to the **Settings** tab of your repo, and under the first page (General settings), scroll down to **Features** and tick the **Issues** checkbox.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/8910ba1a-fa39-4793-adde-b4d5ca7ae32b"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="787" height="247" alt="image" src="https://github.com/user-attachments/assets/c8448d1d-a1a0-4055-a5f3-ce17a7e47786" />
+
 
 4. Once the scan is complete, go to your **Issues** tab of the repo, and your DAST findings should be there.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/4126e11c-2842-4d30-a112-2f72d93a2b36"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="546" height="302" alt="image" src="https://github.com/user-attachments/assets/8a6b5d13-5982-41e2-967b-ce14f3814660" />
+
 
