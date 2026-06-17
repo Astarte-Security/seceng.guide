@@ -1,0 +1,156 @@
+# Nuclei
+
+**Nuclei** by [ProjectDiscovery](https://projectdiscovery.io/) is an open-source, template-based vulnerability scanner. It is widely used by bug bounty hunters, security professionals, and engineering teams to automate vulnerability detection, misconfiguration checks, and security regressions across applications, cloud infrastructure, and networks.
+
+How it works: Nuclei uses a vast library of simple YAML-based templates (similar to Semgrep's rules). These templates define the exact requests to be made (HTTP, DNS, TCP, JavaScript, etc.) and specify conditions (matchers and extractors) to confirm the vulnerability.
+
+## Installing Nuclei locally (optional)
+
+Before we run it as a GitHub Action, it's a good idea to practice using it locally, with on-demand scans.
+
+You can find installation instructions [here](https://docs.projectdiscovery.io/opensource/nuclei/install), in summary here are some options:
+
+- Go
+
+```
+go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
+```
+
+- Brew
+
+```
+brew install nuclei
+```
+
+- Docker
+  
+```
+docker pull projectdiscovery/nuclei:latest
+```
+
+## Running Nuclei locally (optional)
+
+Let's test it against our deployed test instance for Jester Social at https://jester.social (assuming it is still up and running, which it may not be... in which case you can pick a different target!).
+
+The test command we're running is:
+
+```
+nuclei -id tls-version -id http-missing-security-headers -u jester.social
+```
+
+Notice it only enables two specific checks: `tls-version` and `http-missing-security-headers`, which makes the scan run faster.
+
+You could also enable another check by adding `-id rails-debug-mode`, which should return a result, since we have (intentionally) deployed this Rails instance in debug mode, which enables verbose error messages.
+
+> [!Note]
+> Nuclei has a large set of community-submitted templates. Consider which templates you want to enable by exploring the list here: https://github.com/projectdiscovery/nuclei-templates
+
+Scan results should look something like this:
+
+<img
+  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/b9ef1f64-a2fd-4042-a6f6-c7a393106e07"
+  alt=""
+  width=""
+  height=""
+/>
+
+
+## Nuclei GitHub Action
+
+Running Nuclei as an Action gives you an option to automatically run it on a schedule (cron), or, within your CI/CD pipeline to catch regressions earlier.
+
+1. Create a new file called `.github/workflows/nuclei-scanner.yml` (make sure you keep the dot as the first character).
+
+> [!NOTE]
+> **Option**: You can choose to integrate this into the app's repo, which is useful if you intend on running scans within CI/CD for each change.
+> 
+> Or, optionally, you could create a separate dedicated repo for hosting and running your scans. You could also configure them to have multiple targets.
+
+2. Paste the following contents into the file:
+
+```
+name: Nuclei - Vulnerability Scan
+
+on:
+    #schedule:
+    #  - cron: "13 12 * * 1" # At 12:13 on Monday UTC time (8:13 AM EST)
+    workflow_dispatch:
+
+jobs:
+
+  nuclei-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Nuclei - Vulnerability Scan
+        id: nuclei_scan
+        uses: projectdiscovery/nuclei-action@v3
+        with:
+          config: |
+            target: 
+            - https://jester.social
+            id:
+            - ssh-auth-methods
+            - tls-version
+            - rails-debug-mode
+            - ssl-issuer
+            - http-missing-security-headers
+            user-agent: "User-Agent:'Nuclei - Vulnerability Scan'"
+            sarif-export: nuclei.sarif
+            github-report: true
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+
+# OPTIONAL
+# Below uploads results to the security dashboard
+# Requires a public repo, or GHAS
+      - name: GitHub Security Dashboard Alerts update
+        uses: github/codeql-action/upload-sarif@v4
+        if: success()
+        with:
+          sarif_file: nuclei.sarif
+          category: nuclei-results
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+> [!IMPORTANT]
+> The cron schedule section is currently disabled. If you want the scan to run on a schedule, you can un-comment that section out, and replace the cron schedule with the timing you desire.
+>
+> **Please keep it commented (turned off) if you intend on testing this on jester.social to avoid unnecessary traffic to the site.**
+
+3. Once added, because our trigger condition for the Action is `workflow_dispatch`, we will manually run it.
+
+Go to the Actions tab of your repo, then click on your Action name on the left pane, then click on **Run workflow**.
+
+It should look as follows:
+
+<img
+  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/9be1bc5c-adcd-4bb3-8ee1-5b6bb6dd2368"
+  alt=""
+  width=""
+  height=""
+/>
+
+4. The workflow should take a few minutes to run. You can click around to check the logs for any error messages or warnings.
+
+Once it is done, navigate to the **Security and quality** tab of the repo, and click on **Code scanning**, you should see your scan results there.
+
+<img
+  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/47a590e5-c95d-4312-b9e3-fb6a9ddee45a"
+  alt=""
+  width=""
+  height=""
+/>
+
+## Additional resources
+
+- [Nuclei's documentation](https://docs.projectdiscovery.io/opensource/nuclei/running)
+- [Nulcei as a GitHub Action](https://docs.projectdiscovery.io/opensource/nuclei/ci-cd)
+- [Authenticated Scans](https://docs.projectdiscovery.io/opensource/nuclei/authenticated-scans)
+- [Nuclei Templates](https://github.com/projectdiscovery/nuclei-templates)
+
