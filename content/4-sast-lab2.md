@@ -8,12 +8,8 @@ We are now a software engineer who will introduce new code that contains a vulne
 
 1. Navigate to the `app/controllers/jest_controller.rb` file in the GitHub UI, and then click on the edit (pencil) button, and **Edit in place** (or press `E` on your keyboard).
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/e093c7f7-538f-4655-ac3b-157972c3e318"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1036" height="550" alt="image" src="https://github.com/user-attachments/assets/7f891204-b1f8-418a-b2ef-8b9c317764f2" />
+
 
 2. Replace the contents of the file with the following:
 
@@ -93,41 +89,25 @@ The change is on lines 61 and 62. Not sure if this is an appropriate change? Tha
 
 3. Click on **Commit changes...**, then **create a new branch for this commit** and start a pull request.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/1934b480-4dce-4f2f-9d3a-63298eb7a495"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="473" height="159" alt="image" src="https://github.com/user-attachments/assets/a7484bfe-c44f-4593-9fdc-f5db96555c5d" />
+
 
 4. Once you click on **Propose changes**, you should be on a page similar to this:
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/de1aab4a-37b1-436f-bcbd-a5020e2ffa26"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1049" height="888" alt="image" src="https://github.com/user-attachments/assets/b812f935-7812-44ed-8d65-e19ab9b28788" />
+
 
 5. Click on **Create pull request**, give it a title (or keep the default one), then click on **Create pull request** again.
 
 6. Once the PR is created, wait a few moments, and you'll eventually see a new box in the PR's GitHub UI that says **Some checks haven't completed yet**: This means there are Actions running. In the screenshot below, you can see our Semgrep Action queued to run.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/4adbdeb4-1134-499d-ad6e-61d7644ffdcc"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1037" height="969" alt="image" src="https://github.com/user-attachments/assets/3043e0e6-cf02-4a29-af17-5f9883c01173" />
+
 
 7. Once the Action has finished running, navigate to the **Files changed** tab of the PR to see the code changes. You will now see a new box from the semgrep scan, annotating the code, flagging the vulnerability.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/632f366c-d8c4-47bf-a1d9-d941a199330f"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1028" height="744" alt="image" src="https://github.com/user-attachments/assets/74d15fe7-0922-4d15-bac0-9fb9259ff29f" />
+
 
 ## What this means
 
@@ -144,12 +124,8 @@ Potential future improvements for this process:
 
 If you go to your Actions tab or expand details for the Semgrep run, you may have noticed that the Semgrep scan has identified 14 total findings, but only annotated one of them in that PR.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/c221ccb3-4df5-487b-bcea-0db00cc23274"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1307" height="871" alt="image" src="https://github.com/user-attachments/assets/082d55ef-8347-433d-bdfd-11ac9d0b9b36" />
+
 
 This is because our Semgrep Action ran against the entire codebase, not constrained to just the files changed within this PR.
 
