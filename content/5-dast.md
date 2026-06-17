@@ -19,19 +19,11 @@ Example: The version of the app deployed may accidentally have its staging confi
 >
 > So, instead of testing each component individually, we test the entire product as a whole.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/8679cea6-0869-4d86-ab0d-6949067c2352"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="758" height="481" alt="image" src="https://github.com/user-attachments/assets/837c258a-7937-4be6-8468-d4fc62e8f417" />
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/3969ddb8-3c66-464b-8009-62ec6b3033c1"
-  alt=""
-  width=""
-  height=""
-/>
+
+<img width="823" height="523" alt="image" src="https://github.com/user-attachments/assets/1e342ef6-a728-46a7-a921-cef43d130f22" />
+
 
 ## SAST vs DAST
 
