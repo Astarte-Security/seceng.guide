@@ -70,31 +70,19 @@ jobs:
 3. Once the scan is complete, in the Actions page, click on the latest run as in the screenshot below:
 
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/165ad764-9bae-4925-bc81-f7969a0c40a0"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1310" height="354" alt="image" src="https://github.com/user-attachments/assets/179b25b3-4544-4257-86f6-71376e0d37ad" />
+
 
 
 4. At the bottom of the page, you'll see an **Artifacts** section, where we've attached scan results. They are in a ZIP file you'll have to download:
 
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/26a2d2fc-162e-4b67-8e34-989f7205f648"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="965" height="214" alt="image" src="https://github.com/user-attachments/assets/0e14333f-ec02-4b05-9407-2b8e2c7e94ad" />
+
 
 
 5. The ZIP file contains a PDF with your scan results:
 
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/e37809f0-cec9-4e38-8371-5f625e8a65fa"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1020" height="352" alt="image" src="https://github.com/user-attachments/assets/eece3088-e823-4fea-bf95-2059e910839c" />
+
