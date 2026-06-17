@@ -62,33 +62,21 @@ This picks a default set of rules (equivalent to the flag `--config=auto`), and 
 
 You should see the scan beginning with:
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/8da90cd3-beba-4f61-9c26-5c7884abf76d"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="595" height="190" alt="image" src="https://github.com/user-attachments/assets/f23ee8fe-bb14-4449-9d99-51caa20e9318" />
+
 
 Followed by a list of findings (in our case, there were 15 code findings), such as:
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/40eb512d-0eaa-421c-a9dd-f77bc6de2011"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="877" height="164" alt="image" src="https://github.com/user-attachments/assets/7566252d-c848-4dab-bcb7-1ff6f5d2a1ec" />
+
 
 > [!NOTE]
 >A single item from a scanner's output is typically called a _finding_, because we have not triaged the results yet, and have not confirmed whether they are actual vulnerabilities, or _false positives_.
 > 
 > A _false positive_ means a finding surfaced by the scanner that does not actually pose any risk in the context of our app.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/2e6e3ca3-010d-4a6d-90f9-99653a092255"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="615" height="1051" alt="image" src="https://github.com/user-attachments/assets/0199d1ec-fdc0-4098-8121-f2333025a2e5" />
+
 <p class="md-caption">SAST lifecycle</p>
 
 ## SAST limitations
@@ -97,12 +85,8 @@ Because static analysis tools are pattern-matching machines, they can be noisy i
 
 For example, they are GOOD at flagging simple patterns that should be avoided, and can offer recommendations on what should be used instead. As in the following example:
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/8ce186e5-8b24-4cdc-90c9-2c54588a49b9"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="776" height="294" alt="image" src="https://github.com/user-attachments/assets/8a401100-1a5c-43ec-85cf-014811cb2477" />
+
 <p class="md-caption">ECB bad, GCM better!</p>
 
 But what the SAST scanner may have missed is: **What if we're encrypting the password here, when we should instead be hashing it?**
