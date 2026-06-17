@@ -4,12 +4,8 @@ Recent advancements in Large Language Models (LLMs) have improved our ability to
 
 In summary:
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/12c35121-b2ee-498f-b59e-28379285e3a8"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1142" height="579" alt="image" src="https://github.com/user-attachments/assets/8dde3cb6-205b-489f-8fd4-8552770e86af" />
+
 <p class="md-caption">Evolution of SAST</p>
 
 There are four levels of SAST scanning:
