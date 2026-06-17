@@ -24,36 +24,19 @@ From an external perspective, our product can be attacked, and the public percep
 
 1. First, enable Dependabot by going to your repo's **Settings > Advanced Security > Dependabot** and checking the relevant boxes, as shown below:
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/d4853d3b-99df-494e-9cdf-22a7af48fb30"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1142" height="731" alt="image" src="https://github.com/user-attachments/assets/66876113-6fd5-42eb-b372-1658ffeaf97d" />
+
 
 2. Make sure the bottom two Dependabot configurations are also enabled. This will allow a GitHub Action to automatically open a PR to upgrade your dependencies.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/5a23ac30-de16-4650-b210-92ab06326897"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="774" height="251" alt="image" src="https://github.com/user-attachments/assets/37bc6044-b496-41d8-a22a-b346d6ce7947" />
+
 
 3. A few minutes after enabling these options, Dependabot will start opening **Pull requests** to bump up the version of vulnerable dependencies.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/c8cf4efe-6e4f-4161-be14-37339e4d4312"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1275" height="625" alt="image" src="https://github.com/user-attachments/assets/ff8af1bc-d47c-44f2-a8fc-0e6428471b9f" />
+
 
 4. You can also navigate to the **Security and quality** tab of the repo, and find a Dependabot vulnerabilities dashboard that lists dependencies with known vulnerabilities.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/fd48ed30-296e-4268-a0f7-0206e6fc99cf"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1293" height="400" alt="image" src="https://github.com/user-attachments/assets/48301297-5f3a-4eff-a61c-e3c274fce5da" />
