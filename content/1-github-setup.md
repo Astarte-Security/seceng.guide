@@ -9,28 +9,15 @@ This is where the code for our app lives.
 
 3. Click on the `Fork` button in the top-right corner of the page. This will create a copy of this repo under your own GitHub account.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/8197d9b5-fb27-46be-9d49-a09859ca4499"
-  alt=""
-  width=""
-  height=""
-/>
-<p class="md-caption">Button to Fork the repo</p>
+<img width="1094" height="339" alt="image" src="https://github.com/user-attachments/assets/1412c3cc-b801-4f80-b3a7-99f442a054e1" />
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/5ae88f17-1eea-4875-a56a-6e7e2541fae1"
-  alt=""
-  width=""
-  height=""
-/>
+
+<img width="771" height="567" alt="image" src="https://github.com/user-attachments/assets/f99065e0-0600-4176-8d43-dad7263c578a" />
+
 <p class="md-caption">On the next page, you can keep all settings default, and click on "Create fork"</p>
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/72de84d8-ad87-4082-a2fa-c2ae54800c6b"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="755" height="389" alt="image" src="https://github.com/user-attachments/assets/a29bc499-1b23-43a6-87e7-e8643991806f" />
+
 <p class="md-caption">This will take you to your own fork of the repo. This is hosted under your own GitHub account name, which will be visible in the circled areas above.</p>
 
 > [!IMPORTANT]
