@@ -29,12 +29,8 @@ Our goal is to add security controls that would detect and prevent security issu
 - Scanning third-party dependencies (any libraries our app uses to function).
 - Scanning the app itself (a version of it that has been deployed).
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/9ac3291b-e9f1-44c1-b793-fe3ec4c33263"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="841" height="305" alt="image" src="https://github.com/user-attachments/assets/fe162c1a-3b62-415a-80bc-c5cb515ccfd7" />
+
 
 ### The Jester Social app
 
