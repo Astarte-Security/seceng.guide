@@ -47,12 +47,7 @@ You could also enable another check by adding `-id rails-debug-mode`, which shou
 
 Scan results should look something like this:
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/b9ef1f64-a2fd-4042-a6f6-c7a393106e07"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="987" height="526" alt="image" src="https://github.com/user-attachments/assets/46254d0a-3d29-4254-be23-467dee2fde1e" />
 
 
 ## Nuclei GitHub Action
@@ -129,23 +124,15 @@ Go to the Actions tab of your repo, then click on your Action name on the left p
 
 It should look as follows:
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/9be1bc5c-adcd-4bb3-8ee1-5b6bb6dd2368"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1320" height="648" alt="image" src="https://github.com/user-attachments/assets/e7c38194-04c9-4e4c-b649-24abd5ee0e2f" />
+
 
 4. The workflow should take a few minutes to run. You can click around to check the logs for any error messages or warnings.
 
 Once it is done, navigate to the **Security and quality** tab of the repo, and click on **Code scanning**, you should see your scan results there.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/47a590e5-c95d-4312-b9e3-fb6a9ddee45a"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1318" height="524" alt="image" src="https://github.com/user-attachments/assets/2befd6e9-3cf6-4b64-919b-dcb1683da9b2" />
+
 
 ## Additional resources
 
