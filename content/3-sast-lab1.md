@@ -7,12 +7,8 @@ In organizations that use GitHub, this is the standard way of proposing code cha
 
 1. In your fork of Jester Social, click on **Add file**, then **+ Create new file**.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/a5dd855b-2141-4142-84c2-6bafcccecdfc"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="378" height="183" alt="image" src="https://github.com/user-attachments/assets/134d3547-9a42-4ead-ad3b-56fa815c06e3" />
+
 
 2. Create a new file called `.github/workflows/semgrep-ci.yml` (make sure you keep the dot as the first character).
 
@@ -58,21 +54,13 @@ jobs:
 
 4. It will look similar to the screenshot below. Click on **Commit changes**.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/49df3324-d358-40de-8f09-f7e10681ee0d"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1024" height="365" alt="image" src="https://github.com/user-attachments/assets/35c6f66e-0641-48d4-9bd9-aae6b3b0ff55" />
+
 
 5. On the next screen, push directly to the `main` branch, and click **Commit changes**.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/c7405225-d9db-4742-b1c2-3786f0780552"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="473" height="159" alt="image" src="https://github.com/user-attachments/assets/9c7f5468-6c72-408f-8d8b-172576b424bc" />
+
 
 We have just defined a new GitHub action that will run on every new pull request and run a Semgrep scan on the code.
 
@@ -80,20 +68,12 @@ We have just defined a new GitHub action that will run on every new pull request
 
 Now navigate to the **Actions** tab of your GitHub repo. If you see a message similar to the one below, you'll have to enable Actions by clicking on the `I understand my workflows, go ahead and enable them` button.
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/bd98e28a-197f-4222-8ab3-b5508a7cd0d6"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1522" height="478" alt="image" src="https://github.com/user-attachments/assets/17767066-9479-44d3-abcf-51c5622a82d0" />
+
 
 Once set up successfully, it should look similar to:
 
-<img
-  src="https://images.coursestack.com/e2f506a9-6c81-4974-9f04-3e2c6409abcc/70334c73-e872-419d-9808-995a187aa3fb"
-  alt=""
-  width=""
-  height=""
-/>
+<img width="1014" height="419" alt="image" src="https://github.com/user-attachments/assets/ce2ad7a8-c4ee-4323-bcff-46910b53dc28" />
+
 
 Now let's test it to see how it would work from a developer's perspective!
